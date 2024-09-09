@@ -2,25 +2,31 @@
 
 VertexArrayObject::VertexArrayObject()
 {
-    // TODO
+  // Davantage d'informations sur la page 19 du powerpoint 2
+  glGenVertexArrays(1, &m_id);
 }
 
 VertexArrayObject::~VertexArrayObject()
 {
-    // TODO
+  glDeleteVertexArrays(1, &m_id);
 }
 
 void VertexArrayObject::bind()
 {
-    // TODO
+  glBindVertexArray(m_id);
 }
 
 void VertexArrayObject::unbind()
 {
-    // TODO
+  // Page 21 du powerpoint 2
+  glBindVertexArray(0);
 }
 
-void VertexArrayObject::specifyAttribute(BufferObject& buffer, GLuint index, GLint size, GLsizei stride, GLsizeiptr offset)
+void VertexArrayObject::specifyAttribute(BufferObject &buffer, GLuint index, GLint size, GLsizei stride, GLsizeiptr offset)
 {
-    // TODO
+  bind();
+  buffer.bind();
+  glEnableVertexAttribArray(index);
+  // Page #34 du powerpoint 2
+  glVertexAttribPointer(index, size, GL_FLOAT, GL_FALSE, stride, (void *)offset);
 }
