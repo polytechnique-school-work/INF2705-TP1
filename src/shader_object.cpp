@@ -5,18 +5,22 @@
 
 ShaderObject::ShaderObject(GLenum type, const char *code)
 {
-  // TODO
-  std::cout << "Hello";
+  // Création du shader (P.62 du powerpoint 2)
+  m_id = glCreateShader(type);
+  glShaderSource(m_id, 1, &code, NULL);
+  glCompileShader(m_id);
+  checkCompilingError();
 }
 
 ShaderObject::~ShaderObject()
 {
-  // TODO
+  // On supprime le shader
+  glDeleteShader(m_id);
 }
 
 GLuint ShaderObject::id()
 {
-  // TODO
+  return m_id;
 }
 
 void ShaderObject::checkCompilingError()
