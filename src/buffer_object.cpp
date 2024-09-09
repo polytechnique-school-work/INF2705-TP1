@@ -2,42 +2,48 @@
 
 BufferObject::BufferObject()
 {
-    // TODO
+  // P.14 du powerpoint 2
+  glGenBuffers(1, &m_id);
 }
 
-BufferObject::BufferObject(GLenum type, GLsizeiptr dataSize, const void* data, GLenum usage)
-: BufferObject()
+BufferObject::BufferObject(GLenum type, GLsizeiptr dataSize, const void *data, GLenum usage)
+    : BufferObject()
 {
-    // TODO
+  glGenBuffers(1, &m_id);
+  allocate(type, dataSize, data, usage);
 }
 
 BufferObject::~BufferObject()
 {
-    // TODO
+  glDeleteBuffers(1, &m_id);
 }
 
 void BufferObject::bind()
 {
-    // TODO
+  glBindBuffer(m_type, m_id);
 }
 
-void BufferObject::allocate(GLenum type, GLsizeiptr dataSize, const void* data, GLenum usage)
+void BufferObject::allocate(GLenum type, GLsizeiptr dataSize, const void *data, GLenum usage)
 {
-    // TODO
+  // Selon mes recherches, il faut toujours bind avant d'utiliser un buffer pour s'assurer qu'on travaille avec le bon buffer.
+  bind();
+  glBufferData(type, dataSize, data, usage);
 }
 
-void BufferObject::update(GLsizeiptr dataSize, const void* data)
+void BufferObject::update(GLsizeiptr dataSize, const void *data)
 {
-    // TODO
+  bind();
+  glBufferSubData(m_type, 0, dataSize, data);
 }
 
-void* BufferObject::mapBuffer()
+void *BufferObject::mapBuffer()
 {
-    // TODO
+  bind();
+  return glMapBuffer(m_type, GL_WRITE_ONLY);
 }
 
 void BufferObject::unmapBuffer()
 {
-    // TODO
+  bind();
+  glUnmapBuffer(m_type);
 }
-
