@@ -9,6 +9,8 @@ ShaderObject::ShaderObject(GLenum type, const char *code)
   m_id = glCreateShader(type);
   glShaderSource(m_id, 1, &code, NULL);
   glCompileShader(m_id);
+
+  // TODO: Remove this
   checkCompilingError();
 }
 
