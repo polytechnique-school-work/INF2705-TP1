@@ -1,5 +1,4 @@
 #include "shader_object.h"
-#include "stdio.h"
 
 #include <iostream>
 

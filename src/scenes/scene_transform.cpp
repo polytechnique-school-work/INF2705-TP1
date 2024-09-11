@@ -3,7 +3,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-SceneTransform::SceneTransform(Resources& res, bool& isMouseMotionEnabled, bool& isThirdPerson)
+SceneTransform::SceneTransform(Resources& res, bool& isMouseMotionEnabled, bool& isThirdPerson, bool& isOrtho)
 : Scene(res)
 {
     // TODO
@@ -14,7 +14,15 @@ void SceneTransform::run(Window& w)
     updateInput(w);
 
     // TODO
+    const float SCREEN_SIZE_ORTHO = 5.0f;
     
+    float carouselHorseTranslation = sin(m_carouselAngleRad * 2.0f) / 6.0f;
+    const int N_HORSES = 5;
+    for (int i = 0; i < N_HORSES; i++)
+    {
+        //TODO	
+	}
+    m_carouselAngleRad -= 0.01f;    
 }
 
 void SceneTransform::updateInput(Window& w)
@@ -35,6 +43,11 @@ void SceneTransform::updateInput(Window& w)
         positionOffset.x -= SPEED;
     if (w.getKeyHold(Window::Key::D))
         positionOffset.x += SPEED;
+        
+    if (w.getKeyHold(Window::Key::Q))
+        positionOffset.y -= SPEED;
+    if (w.getKeyHold(Window::Key::E))
+        positionOffset.y += SPEED;
 
     positionOffset = glm::rotate(glm::mat4(1.0f), m_cameraOrientation.y, glm::vec3(0.0, 1.0, 0.0)) * glm::vec4(positionOffset, 1);
     m_cameraPosition += positionOffset;

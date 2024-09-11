@@ -20,7 +20,8 @@ public:
     GLint mvpLocationTransformColorAttrib;
     
     ShaderProgram transformSolidColor; 
-    GLint mvpLocationTransformSolidColor;   
+    GLint mvpLocationTransformSolidColor;
+    GLint colorLocationTransformSolidColor;
     
     // Buffer Objects    
     BufferObject coloredTriangleBuffer;

@@ -14,7 +14,9 @@ public:
 
     virtual void run(Window& w);
     
-private:    
+private:
+    float m_rotationAngleDegree;
+
     BufferObject m_cubeBuffer;
     BufferObject m_cubeIndicesBuffer;
     VertexArrayObject m_cubeVao;

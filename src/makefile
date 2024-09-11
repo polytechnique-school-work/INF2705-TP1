@@ -6,7 +6,7 @@ CXXFLAGS += -g -W -Wall -Wno-unused-parameter -Wvla -std=c++17 -pedantic -I./# -
 CXXFLAGS += $(shell pkg-config --cflags glew || echo -I/usr/local/include)
 CXXFLAGS += $(shell pkg-config --cflags $(CONTEXT) || echo -I/usr/local/include/SDL2)
 
-LDFLAGS += -g
+LDFLAGS += -L./ -L$(BUILD) -Wl,-rpath=./ -lcorrector
 LDFLAGS += $(shell pkg-config --libs glew || echo -I/usr/local/lib -lGLEW)
 LDFLAGS += $(shell pkg-config --libs $(CONTEXT) || echo -I/usr/local/lib -lSDL2)
 
@@ -21,13 +21,13 @@ exe : $(EXE)
 run : exe
 	$(EXE)
 $(EXE) : $(OBJ)
-	$(CXX) $(CXXFLAGS) -o$@ $^ $(LDFLAGS)
+	$(CXX) -o$@ $^ $(LDFLAGS)
 
 $(BUILD)/%.o : %.cpp | $(BUILD)
-	$(CC) $(CFLAGS) $(CXXFLAGS) -o $@ -c $<
+	$(CXX) $(CFLAGS) $(CXXFLAGS) -o $@ -c $<
 
 $(BUILD)/%.o : */%.cpp | $(BUILD)
-	$(CC) $(CFLAGS) $(CXXFLAGS) -o $@ -c $<
+	$(CXX) $(CFLAGS) $(CXXFLAGS) -o $@ -c $<
 
 $(BUILD) :
 	mkdir -p $@
@@ -40,4 +40,4 @@ clean :
 remise zip :
 	make clean
 	rm -f INF2705_remise_tp1.zip
-	zip -r INF2705_remise_tp1.zip *.cpp *.h *.glsl makefile *.txt shaders
+	zip -r INF2705_remise_tp1.zip *.cpp *.h *.glsl makefile *.txt shaders scenes
