@@ -1,13 +1,10 @@
 #version 330 core
 
-// TODO
+in vec3 fragColor
 
 out vec4 color;
 
 void main() {
-    color = vec4(1.0, 0.0, 0.0, 1.0); // Rouge opaque //couleur pris de chatGPT
+    color = vec4(fragColor, 1.0); //alpha de 1 -> opaque
 }
 
-//Le fragment shader fait simplement
-//l’assignation d’une variable out de type vec4 pour la couleur de votre choix avec un alpha de 1
-//(attention d’avoir une couleur différente du clearColor).

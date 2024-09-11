@@ -2,11 +2,17 @@
 #define VERTICES_DATA_H
 
 const GLfloat triVertices[] = {
-    // TODO
+    -0.5f, -0.5f,
+     0.5f, -0.5f,
+     0.0f, 0.5f,
+
 };
 
 const GLfloat squareVertices[] = {
-    // TODO
+    -0.5, -0.5,
+     0.5, -0.5,
+    -0.5, 0.5,
+     0.5, 0.5
 };
 
 const GLfloat colorTriVertices[] = {
