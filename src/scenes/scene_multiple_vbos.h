@@ -10,23 +10,23 @@
 class SceneMultipleVbos : public Scene
 {
 public:
-    SceneMultipleVbos(Resources& res);
+  SceneMultipleVbos(Resources &res);
 
-    virtual void run(Window& w);
-
-private:
-    void changeRGB(GLfloat* color);
-    void changePos(GLfloat* pos, float& cx, float& cy, float& dx, float& dy);    
+  virtual void run(Window &w);
 
 private:
-    float m_positionX, m_positionY;
-    float m_deltaX, m_deltaY;
-    GLfloat m_onlyColorTriVertices[9];
+  void changeRGB(GLfloat *color);
+  void changePos(GLfloat *pos, float &cx, float &cy, float &dx, float &dy);
 
-    BufferObject m_coloredTrianglePositionBuffer;
-    BufferObject m_coloredTriangleColorBuffer;
-    VertexArrayObject m_coloredTriangleMultipleVbosVao;
-    DrawArraysCommand m_coloredTriangleMultipleVbosDraw;
+private:
+  float m_positionX, m_positionY;
+  float m_deltaX, m_deltaY;
+  GLfloat m_onlyColorTriVertices[9];
+
+  BufferObject m_coloredTrianglePositionBuffer;
+  BufferObject m_coloredTriangleColorBuffer;
+  VertexArrayObject m_coloredTriangleMultipleVbosVao;
+  // DrawArraysCommand m_coloredTriangleMultipleVbosDraw;
 };
 
 #endif // SCENE_MULTIPLE_VBOS_H

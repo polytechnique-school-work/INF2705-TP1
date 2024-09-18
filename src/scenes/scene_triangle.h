@@ -10,14 +10,14 @@
 class SceneTriangle : public Scene
 {
 public:
-    SceneTriangle(Resources& res);
+  SceneTriangle(Resources &res);
 
-    virtual void run(Window& w);
-    
+  virtual void run(Window &w);
+
 private:
-    BufferObject m_triangleBuffer;
-    VertexArrayObject m_triangleVao;
-    DrawArraysCommand m_triangleDraw;
+  BufferObject m_triangleBuffer;
+  VertexArrayObject m_triangleVao;
+  DrawArraysCommand m_triangleDraw;
 };
 
 #endif // SCENE_TRIANGLE_H

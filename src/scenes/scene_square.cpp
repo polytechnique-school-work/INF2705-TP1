@@ -2,14 +2,13 @@
 
 #include "vertices_data.h"
 
-SceneSquare::SceneSquare(Resources& res)
-: Scene(res)
+SceneSquare::SceneSquare(Resources &res)
+    : Scene(res)
 {
-    // TODO
+  // TODO
 }
 
-void SceneSquare::run(Window& w)
+void SceneSquare::run(Window &w)
 {
-    // TODO
+  // TODO
 }
-

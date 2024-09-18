@@ -2,14 +2,14 @@
 
 #include "vertices_data.h"
 
-SceneColoredTriangle::SceneColoredTriangle(Resources& res)
-: Scene(res)
+SceneColoredTriangle::SceneColoredTriangle(Resources &res)
+    : Scene(res),
+      m_coloredTriangleDraw(m_coloredTriangleVao, 3)
 {
-    // TODO
+  // TODO
 }
 
-void SceneColoredTriangle::run(Window& w)
+void SceneColoredTriangle::run(Window &w)
 {
-    // TODO
+  // TODO
 }
-

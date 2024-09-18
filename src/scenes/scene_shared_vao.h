@@ -10,18 +10,17 @@
 class SceneSharedVao : public Scene
 {
 public:
-    SceneSharedVao(Resources& res);
+  SceneSharedVao(Resources &res);
 
-    virtual void run(Window& w);
-    
-    void runTriangle();
-    void runSquare();
-    
+  virtual void run(Window &w);
+
+  void runTriangle();
+  void runSquare();
+
 private:
-    VertexArrayObject m_sharedVao;
-    DrawArraysCommand m_coloredTriangleSharedDraw;
-    DrawElementsCommand m_coloredSquareSharedDraw;
+  VertexArrayObject m_sharedVao;
+  //  DrawArraysCommand m_coloredTriangleSharedDraw;
+  // DrawElementsCommand m_coloredSquareSharedDraw;
 };
 
 #endif // SCENE_SHARED_VAO_H
-

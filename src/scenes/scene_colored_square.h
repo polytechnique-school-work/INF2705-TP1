@@ -10,14 +10,14 @@
 class SceneColoredSquare : public Scene
 {
 public:
-    SceneColoredSquare(Resources& res);
+  SceneColoredSquare(Resources &res);
 
-    virtual void run(Window& w);
-    
+  virtual void run(Window &w);
+
 private:
-    BufferObject m_coloredSquareBuffer;
-    VertexArrayObject m_coloredSquareVao;
-    DrawArraysCommand m_coloredSquareDraw;
+  BufferObject m_coloredSquareBuffer;
+  VertexArrayObject m_coloredSquareVao;
+  // DrawArraysCommand m_coloredSquareDraw;
 };
 
 #endif // SCENE_COLORED_SQUARE_H

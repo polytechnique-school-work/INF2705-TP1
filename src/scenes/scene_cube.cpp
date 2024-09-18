@@ -5,15 +5,14 @@
 
 #include "vertices_data.h"
 
-SceneCube::SceneCube(Resources& res)
-: Scene(res)
+SceneCube::SceneCube(Resources &res)
+    : Scene(res)
 {
-    // TODO
+  // TODO
 }
 
-void SceneCube::run(Window& w)
+void SceneCube::run(Window &w)
 {
-    m_rotationAngleDegree += 0.5f;
-	// TODO
+  m_rotationAngleDegree += 0.5f;
+  // TODO
 }
-

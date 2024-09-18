@@ -2,14 +2,13 @@
 
 #include "vertices_data.h"
 
-SceneColoredSquare::SceneColoredSquare(Resources& res)
-: Scene(res)
+SceneColoredSquare::SceneColoredSquare(Resources &res)
+    : Scene(res)
 {
-    // TODO
+  // TODO
 }
 
-void SceneColoredSquare::run(Window& w)
+void SceneColoredSquare::run(Window &w)
 {
-    // TODO
+  // TODO
 }
-

@@ -2,25 +2,23 @@
 
 #include "vertices_data.h"
 
-SceneSharedVao::SceneSharedVao(Resources& res)
-: Scene(res)
+SceneSharedVao::SceneSharedVao(Resources &res)
+    : Scene(res)
 {
-    // TODO
+  // TODO
 }
 
-void SceneSharedVao::run(Window& w)
+void SceneSharedVao::run(Window &w)
 {
-    // Exceptionnellement, cette méthode n'est pas utilisée
+  // Exceptionnellement, cette méthode n'est pas utilisée
 }
-    
+
 void SceneSharedVao::runTriangle()
 {
-    // TODO
+  // TODO
 }
 
 void SceneSharedVao::runSquare()
 {
-    // TODO
+  // TODO
 }
-
-

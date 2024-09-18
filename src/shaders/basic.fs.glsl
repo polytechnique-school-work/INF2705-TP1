@@ -1,10 +1,9 @@
 #version 330 core
 
-in vec3 fragColor
+out vec4 fragColor;
 
-out vec4 color;
 
 void main() {
-    color = vec4(fragColor, 1.0); //alpha de 1 -> opaque
+    fragColor = vec4(0, 0, 1, 1.0); //alpha de 1 -> opaque
 }
 

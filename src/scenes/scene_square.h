@@ -10,14 +10,14 @@
 class SceneSquare : public Scene
 {
 public:
-    SceneSquare(Resources& res);
+  SceneSquare(Resources &res);
 
-    virtual void run(Window& w);
-    
+  virtual void run(Window &w);
+
 private:
-    BufferObject m_squareBuffer;
-    VertexArrayObject m_squareVao;
-    DrawArraysCommand m_squareDraw;
+  BufferObject m_squareBuffer;
+  VertexArrayObject m_squareVao;
+  // DrawArraysCommand m_squareDraw;
 };
 
 #endif // SCENE_SQUARE_H

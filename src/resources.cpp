@@ -8,10 +8,11 @@
 
 Resources::Resources()
 {
-    // TODO
+  // TODO
+  initShaderProgram(basic, "shaders/basic.vs.glsl", "shaders/basic.fs.glsl");
 }
 
-void Resources::initShaderProgram(ShaderProgram& program, const char* vertexSrcPath, const char* fragmentSrcPath)    
+void Resources::initShaderProgram(ShaderProgram &program, const char *vertexSrcPath, const char *fragmentSrcPath)
 {
-    // TODO
+  // TODO
 }

@@ -3,68 +3,65 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-SceneTransform::SceneTransform(Resources& res, bool& isMouseMotionEnabled, bool& isThirdPerson, bool& isOrtho)
-: Scene(res)
+SceneTransform::SceneTransform(Resources &res, bool &isMouseMotionEnabled, bool &isThirdPerson, bool &isOrtho)
+    : Scene(res),
+      m_isMouseMotionEnabled(isMouseMotionEnabled),
+      m_isThirdPerson(isThirdPerson),
+      m_isOrtho(isOrtho)
 {
+  // TODO
+}
+
+void SceneTransform::run(Window &w)
+{
+  updateInput(w);
+
+  // TODO
+  const float SCREEN_SIZE_ORTHO = 5.0f;
+
+  float carouselHorseTranslation = sin(m_carouselAngleRad * 2.0f) / 6.0f;
+  const int N_HORSES = 5;
+  for (int i = 0; i < N_HORSES; i++)
+  {
     // TODO
+  }
+  m_carouselAngleRad -= 0.01f;
 }
 
-void SceneTransform::run(Window& w)
+void SceneTransform::updateInput(Window &w)
 {
-    updateInput(w);
+  int x = 0, y = 0;
+  if (m_isMouseMotionEnabled)
+    w.getMouseMotion(x, y);
+  m_cameraOrientation.y -= x * 0.01f;
+  m_cameraOrientation.x -= y * 0.01f;
 
-    // TODO
-    const float SCREEN_SIZE_ORTHO = 5.0f;
-    
-    float carouselHorseTranslation = sin(m_carouselAngleRad * 2.0f) / 6.0f;
-    const int N_HORSES = 5;
-    for (int i = 0; i < N_HORSES; i++)
-    {
-        //TODO	
-	}
-    m_carouselAngleRad -= 0.01f;    
+  glm::vec3 positionOffset = glm::vec3(0.0);
+  const float SPEED = 0.1f;
+  if (w.getKeyHold(Window::Key::W))
+    positionOffset.z -= SPEED;
+  if (w.getKeyHold(Window::Key::S))
+    positionOffset.z += SPEED;
+  if (w.getKeyHold(Window::Key::A))
+    positionOffset.x -= SPEED;
+  if (w.getKeyHold(Window::Key::D))
+    positionOffset.x += SPEED;
+
+  if (w.getKeyHold(Window::Key::Q))
+    positionOffset.y -= SPEED;
+  if (w.getKeyHold(Window::Key::E))
+    positionOffset.y += SPEED;
+
+  positionOffset = glm::rotate(glm::mat4(1.0f), m_cameraOrientation.y, glm::vec3(0.0, 1.0, 0.0)) * glm::vec4(positionOffset, 1);
+  m_cameraPosition += positionOffset;
 }
-
-void SceneTransform::updateInput(Window& w)
-{
-    int x = 0, y = 0;
-    if (m_isMouseMotionEnabled)
-        w.getMouseMotion(x, y);
-    m_cameraOrientation.y -= x * 0.01f;
-    m_cameraOrientation.x -= y * 0.01f;
-
-    glm::vec3 positionOffset = glm::vec3(0.0);
-    const float SPEED = 0.1f;
-    if (w.getKeyHold(Window::Key::W))
-        positionOffset.z -= SPEED;
-    if (w.getKeyHold(Window::Key::S))
-        positionOffset.z += SPEED;
-    if (w.getKeyHold(Window::Key::A))
-        positionOffset.x -= SPEED;
-    if (w.getKeyHold(Window::Key::D))
-        positionOffset.x += SPEED;
-        
-    if (w.getKeyHold(Window::Key::Q))
-        positionOffset.y -= SPEED;
-    if (w.getKeyHold(Window::Key::E))
-        positionOffset.y += SPEED;
-
-    positionOffset = glm::rotate(glm::mat4(1.0f), m_cameraOrientation.y, glm::vec3(0.0, 1.0, 0.0)) * glm::vec4(positionOffset, 1);
-    m_cameraPosition += positionOffset;
-}
-
 
 glm::mat4 SceneTransform::getCameraFirstPerson()
-{   
-    // TODO
+{
+  // TODO
 }
-
 
 glm::mat4 SceneTransform::getCameraThirdPerson()
 {
-    // TODO
+  // TODO
 }
-
-
-
-

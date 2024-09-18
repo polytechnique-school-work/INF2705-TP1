@@ -10,17 +10,17 @@
 class SceneCube : public Scene
 {
 public:
-    SceneCube(Resources& res);
+  SceneCube(Resources &res);
 
-    virtual void run(Window& w);
-    
+  virtual void run(Window &w);
+
 private:
-    float m_rotationAngleDegree;
+  float m_rotationAngleDegree;
 
-    BufferObject m_cubeBuffer;
-    BufferObject m_cubeIndicesBuffer;
-    VertexArrayObject m_cubeVao;
-    DrawElementsCommand m_cubeDraw;
+  BufferObject m_cubeBuffer;
+  BufferObject m_cubeIndicesBuffer;
+  VertexArrayObject m_cubeVao;
+  // DrawElementsCommand m_cubeDraw;
 };
 
 #endif // SCENE_CUBE_H

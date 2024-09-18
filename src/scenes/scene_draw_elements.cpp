@@ -2,15 +2,13 @@
 
 #include "vertices_data.h"
 
-SceneDrawElements::SceneDrawElements(Resources& res)
-: Scene(res)
+SceneDrawElements::SceneDrawElements(Resources &res)
+    : Scene(res)
 {
-    // TODO
+  // TODO
 }
 
-void SceneDrawElements::run(Window& w)
+void SceneDrawElements::run(Window &w)
 {
-    // TODO
+  // TODO
 }
-
-
