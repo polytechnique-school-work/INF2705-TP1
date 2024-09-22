@@ -1,13 +1,22 @@
 #include "buffer_object.h"
 
 BufferObject::BufferObject()
+:m_type(GL_ARRAY_BUFFER)
+{
+    //danger!!!
+  // P.14 du powerpoint 2
+  glGenBuffers(1, &m_id);
+}
+
+BufferObject::BufferObject(GLenum type)
+:m_type(type)
 {
   // P.14 du powerpoint 2
   glGenBuffers(1, &m_id);
 }
 
 BufferObject::BufferObject(GLenum type, GLsizeiptr dataSize, const void *data, GLenum usage)
-    : BufferObject()
+    : BufferObject(type)
 {
   glGenBuffers(1, &m_id);
   allocate(type, dataSize, data, usage);

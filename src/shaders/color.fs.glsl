@@ -1,8 +1,6 @@
 #version 330 core
 
-// TODO
-
-in vec3 fragColor
+in vec3 fragColor;
 
 out vec4 color;
 

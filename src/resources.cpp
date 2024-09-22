@@ -8,19 +8,22 @@
 
 Resources::Resources()
 {
-  initShaderProgram(basic, "shaders/basic.vs.glsl", "shaders/basic.fs.glsl");
+  initShaderProgram(basic, "../shaders/basic.vs.glsl", "../shaders/basic.fs.glsl");
+ 
+
 }
 
 void Resources::initShaderProgram(ShaderProgram &program, const char *vertexSrcPath, const char *fragmentSrcPath)
 {
-  ShaderObject vertexShader(GL_VERTEX_SHADER, vertexSrcPath);
-  ShaderObject fragmentShader(GL_FRAGMENT_SHADER, fragmentSrcPath);
+
+  std::string vertexShaderCode = readFile(vertexSrcPath);
+  std::string fragmentShaderCode = readFile(fragmentSrcPath);
+  ShaderObject vertexShader(GL_VERTEX_SHADER, vertexShaderCode.c_str());
+  ShaderObject fragmentShader(GL_FRAGMENT_SHADER, fragmentShaderCode.c_str());
 
   program.attachShaderObject(vertexShader);
   program.attachShaderObject(fragmentShader);
 
-  glCompileShader(vertexShader.id());
-  glCompileShader(fragmentShader.id());
-  program.use();
   program.link();
+  program.use();
 }
