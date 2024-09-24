@@ -14,10 +14,9 @@ const GLfloat squareVertices[] = {
 };
 
 const GLfloat colorTriVertices[] = {
-    0.5, 0.0, 0.0,
-    0.0, 0.5, 0.0,
-    0.0, 0.0, 0.5
-    // https://gitlab.com/ozell/inf2705-exemples/-/blob/master/03-Base/src/main.cpp
+    1, 0.0, 0.0,
+    0.0, 1, 0.0,
+    0.0, 0.0, 1
 };
 
 /* const GLfloat colorSquareVertices[] = {
