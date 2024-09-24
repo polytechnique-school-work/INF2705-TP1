@@ -8,7 +8,7 @@
 
 Resources::Resources()
 {
-  initShaderProgram(basic, "../shaders/basic.vs.glsl", "../shaders/basic.fs.glsl");
+  initShaderProgram(basic, "./shaders/basic.vs.glsl", "./shaders/basic.fs.glsl");
  
 
 }

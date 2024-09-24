@@ -61,12 +61,7 @@
 "makefile.makefilePath": "/home/marianna/INF2705/INF2705-TP1/src/makefile",
 "makefile.launchConfigurations": [
     {
-        "cwd": "/home/marianna/INF2705/INF2705-TP1/build-Linux",
-        "binaryPath": "/home/marianna/INF2705/INF2705-TP1/build-Linux/tp1.exe",
-        "binaryArgs": []
-    },
-    {
-        "cwd": "/home/marianna/INF2705/INF2705-TP1/src/build-Linux",
+        "cwd": "/home/marianna/INF2705/INF2705-TP1/src",
         "binaryPath": "/home/marianna/INF2705/INF2705-TP1/src/build-Linux/tp1.exe",
         "binaryArgs": []
     }
