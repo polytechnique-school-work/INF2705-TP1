@@ -9,8 +9,7 @@
 Resources::Resources()
 {
   initShaderProgram(basic, "./shaders/basic.vs.glsl", "./shaders/basic.fs.glsl");
- 
-
+  initShaderProgram(color, "./shaders/color.vs.glsl", "./shaders/color.fs.glsl");
 }
 
 void Resources::initShaderProgram(ShaderProgram &program, const char *vertexSrcPath, const char *fragmentSrcPath)

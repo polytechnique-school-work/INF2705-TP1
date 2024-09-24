@@ -14,9 +14,10 @@ const GLfloat squareVertices[] = {
 };
 
 const GLfloat colorTriVertices[] = {
-    1, 0.0, 0.0,
-    0.0, 1, 0.0,
-    0.0, 0.0, 1
+    // Position         // Couleur
+    -0.5f, -0.5f,       1.0f, 0.0f, 0.0f,  // Sommet 1 : Position + Couleur rouge
+     0.5f, -0.5f,       0.0f, 1.0f, 0.0f,  // Sommet 2 : Position + Couleur verte
+     0.0f,  0.5f,       0.0f, 0.0f, 1.0f   // Sommet 3 : Position + Couleur bleue
 };
 
 /* const GLfloat colorSquareVertices[] = {
