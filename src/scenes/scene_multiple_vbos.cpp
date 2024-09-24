@@ -1,13 +1,25 @@
 #include "scene_multiple_vbos.h"
 
 #include "vertices_data.h"
+#include <utils.h>
 
 SceneMultipleVbos::SceneMultipleVbos(Resources &res)
     : Scene(res), m_positionX(0.0f), m_positionY(0.0f), m_deltaX(0.019f), m_deltaY(0.0128f), m_onlyColorTriVertices{1.0f, 0.0f, 0.0f,
                                                                                                                     1.0f, 0.0f, 0.0f,
-                                                                                                                    1.0f, 0.0f, 0.0f}
+                                                                                                                    1.0f, 0.0f, 0.0f},
+    m_coloredTriangleMultipleVbosDraw(m_coloredTriangleMultipleVbosVao, 3)
 {
-  // TODO
+    m_coloredTrianglePositionBuffer.allocate(GL_ARRAY_BUFFER, sizeof(colorTriVertices), colorTriVertices, GL_STATIC_DRAW);
+    CHECK_GL_ERROR;
+
+    m_coloredTriangleColorBuffer.allocate(GL_ARRAY_BUFFER, sizeof(m_onlyColorTriVertices), m_onlyColorTriVertices, GL_STATIC_DRAW);
+    CHECK_GL_ERROR;
+    
+    m_coloredTriangleMultipleVbosVao.specifyAttribute(m_coloredTrianglePositionBuffer, 0, 2, 5 * sizeof(float), 0 * sizeof(float));
+    CHECK_GL_ERROR;
+
+    m_coloredTriangleMultipleVbosVao.specifyAttribute(m_coloredTrianglePositionBuffer, 1, 3, 5 * sizeof(float), 2 * sizeof(float));
+    CHECK_GL_ERROR;
 }
 
 void SceneMultipleVbos::run(Window &w)
@@ -17,10 +29,13 @@ void SceneMultipleVbos::run(Window &w)
   changeRGB(&m_onlyColorTriVertices[6]);
   // TODO mise a jour de la couleur
 
+
   // TODO mise a jour de la position
   // changePos(posPtr, m_positionX, m_positionY, m_deltaX, m_deltaY);
+  //changePos(, m_positionX, m_positionY, m_deltaX, m_deltaY);
 
   // TODO dessin
+  
 }
 
 void SceneMultipleVbos::changeRGB(GLfloat *color)

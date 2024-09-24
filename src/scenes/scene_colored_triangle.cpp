@@ -5,7 +5,7 @@
 
 SceneColoredTriangle::SceneColoredTriangle(Resources &res)
     : Scene(res),
-      m_coloredTriangleDraw(m_coloredTriangleVao, 3)
+    m_coloredTriangleDraw(m_coloredTriangleVao, 3)
 {
     // 1. Initialiser les shaders dans resource
 
@@ -27,5 +27,5 @@ void SceneColoredTriangle::run(Window &w)
     m_resources.color.use();
     CHECK_GL_ERROR;
     m_coloredTriangleDraw.draw();
-    m_coloredTriangleDraw.unbind();
+    //m_coloredTriangleDraw.unbind();
 }
