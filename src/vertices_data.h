@@ -14,22 +14,25 @@ const GLfloat squareVertices[] = {
 };
 
 const GLfloat colorTriVertices[] = {
-    // Position         // Couleur
-    -0.5f, -0.5f,       1.0f, 0.0f, 0.0f,  // Sommet 1 : Position + Couleur rouge
-     0.5f, -0.5f,       0.0f, 1.0f, 0.0f,  // Sommet 2 : Position + Couleur verte
-     0.0f,  0.5f,       0.0f, 0.0f, 1.0f   // Sommet 3 : Position + Couleur bleue
+    -0.5f, -0.5f,   1.0f, 0.0f, 0.0f,
+     0.5f, -0.5f,   0.0f, 1.0f, 0.0f,
+     0.0f,  0.5f,   0.0f, 0.0f, 1.0f 
 };
 
-/* const GLfloat colorSquareVertices[] = {
-    // TODO
+const GLfloat colorSquareVertices[] = {
+    -0.5f, -0.5f,   1.0f, 0.0f, 0.0f,
+     0.5f, -0.5f,   0.0f, 1.0f, 0.0f,
+     0.5f,  0.5f,   0.0f, 0.0f, 1.0f,
+    -0.5f,  0.5f,   0.0f, 1.0f, 1.0f
 };
 
-const GLfloat colorSquareVerticesReduced[] = {
-    // TODO
-};
-const GLubyte indexes[] = {
-    // TODO
-}; */
+// const GLfloat colorSquareVerticesReduced[] = {
+//     // TODO
+// };
+
+// const GLubyte indexes[] = {
+//     // TODO
+// };
 
 const GLfloat cubeVertices[] = {
     // +z

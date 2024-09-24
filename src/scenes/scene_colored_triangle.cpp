@@ -10,8 +10,6 @@ SceneColoredTriangle::SceneColoredTriangle(Resources &res)
     // 1. Initialiser les shaders dans resource
 
     // 2. Utiliser les vertices
-    // res.coloredTriangleBuffer.allocate(GL_ARRAY_BUFFER, sizeof(triVertices), triVertices, GL_STATIC_DRAW);
-    // CHECK_GL_ERROR;
 
     res.coloredTriangleBuffer.allocate(GL_ARRAY_BUFFER, sizeof(colorTriVertices), colorTriVertices, GL_STATIC_DRAW);
     CHECK_GL_ERROR;
@@ -29,5 +27,5 @@ void SceneColoredTriangle::run(Window &w)
     m_resources.color.use();
     CHECK_GL_ERROR;
     m_coloredTriangleDraw.draw();
-    // m_coloredTriangleDraw.unbind();
+    m_coloredTriangleDraw.unbind();
 }
