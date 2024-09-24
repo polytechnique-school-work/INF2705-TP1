@@ -9,7 +9,7 @@ void DrawArraysCommand::draw()
 {
   m_vao.bind();
   // P.32 du powerpoint 2
-  glDrawArrays(GL_TRIANGLES, 0, m_count);
+  glDrawArrays(GL_TRIANGLE_FAN, 0, m_count);
 }
 
 void DrawArraysCommand::setCount(GLsizei count)
