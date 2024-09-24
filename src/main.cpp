@@ -82,12 +82,12 @@ int main(int argc, char *argv[])
     // TODO nettoyage des tampons appropriés
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    /*ImGui::Begin("Scene Parameters");
+    ImGui::Begin("Scene Parameters");
     ImGui::Combo("Scene", &currentScene, SCENE_NAMES, N_SCENE_NAMES);
     ImGui::Checkbox("Third person?", &isThirdPerson);
     ImGui::Checkbox("Orthographic camera?", &isOrtho);
-    ImGui::End();*/
-
+    ImGui::End();
+    
     if (w.getKeyPress(Window::Key::SPACE))
       isMouseMotionEnabled = !isMouseMotionEnabled;
 

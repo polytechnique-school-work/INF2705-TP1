@@ -7,10 +7,11 @@ const GLfloat triVertices[] = {
     0.0f, 0.5f};
 
 const GLfloat squareVertices[] = {
-    -0.5, -0.5,
-    0.5, -0.5,
-    -0.5, 0.5,
-    0.5, 0.5};
+    -0.5f, -0.5f, 
+     0.5f, -0.5f, 
+     0.5f,  0.5f, 
+    -0.5f,  0.5f  
+};
 
 const GLfloat colorTriVertices[] = {
     0.5, 0.0, 0.0,

@@ -9,7 +9,7 @@ SceneTriangle::SceneTriangle(Resources &res)
         m_triangleBuffer(GL_ARRAY_BUFFER),
         m_triangleDraw(m_triangleVao, 3)
 {
-  // 1. Initialiser les shaders dans resOURCE
+  // 1. Initialiser les shaders dans resource
 
   // 2. Utiliser les vertices
   m_triangleBuffer.allocate(GL_ARRAY_BUFFER, sizeof(triVertices), triVertices, GL_STATIC_DRAW);
