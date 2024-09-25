@@ -22,6 +22,14 @@ void VertexArrayObject::unbind()
   glBindVertexArray(0);
 }
 
+/*
+  Permet de spécifier les attributs du vertex array object
+  @param buffer: le buffer à utiliser
+  @param index: l'index du vertex à utiliser
+  @param size: le nombre de composantes par vertex
+  @param stride: la taille en octets entre les vertices
+  @param offset: le décalage en octets à partir du début du buffer
+*/
 void VertexArrayObject::specifyAttribute(BufferObject &buffer, GLuint index, GLint size, GLsizei stride, GLsizeiptr offset)
 {
   bind();

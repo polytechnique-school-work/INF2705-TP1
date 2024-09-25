@@ -8,26 +8,25 @@
 class Resources
 {
 public:
-    Resources();
-    
-    void initShaderProgram(ShaderProgram& program, const char* vertexSrcPath, const char* fragmentSrcPath);
-    
-    // Shaders
-    ShaderProgram basic;
-    ShaderProgram color;
-    
-    ShaderProgram transformColorAttrib; 
-    GLint mvpLocationTransformColorAttrib;
-    
-    ShaderProgram transformSolidColor; 
-    GLint mvpLocationTransformSolidColor;
-    GLint colorLocationTransformSolidColor;
-    
-    // Buffer Objects    
-    BufferObject coloredTriangleBuffer;
-    
-    BufferObject coloredSquareReduceBuffer;
-    BufferObject coloredSquareReduceIndicesBuffer;
+  Resources();
+
+  void initShaderProgram(ShaderProgram &program, const char *vertexSrcPath, const char *fragmentSrcPath);
+
+  // Shaders
+  ShaderProgram basic;
+  ShaderProgram color;
+
+  ShaderProgram transformColorAttrib;
+  GLint mvpLocationTransformColorAttrib;
+
+  ShaderProgram transformSolidColor;
+  GLint mvpLocationTransformSolidColor;
+  GLint colorLocationTransformSolidColor;
+
+  // Buffer Objects
+  BufferObject coloredTriangleBuffer;
+  BufferObject coloredSquareReduceBuffer;
+  BufferObject coloredSquareReduceIndicesBuffer;
 };
 
 #endif // RESOURCES_H
