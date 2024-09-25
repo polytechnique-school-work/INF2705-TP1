@@ -2,40 +2,48 @@
 
 #include "vertices_data.h"
 #include <utils.h>
-
 SceneMultipleVbos::SceneMultipleVbos(Resources &res)
     : Scene(res), m_positionX(0.0f), m_positionY(0.0f), m_deltaX(0.019f), m_deltaY(0.0128f), m_onlyColorTriVertices{1.0f, 0.0f, 0.0f,
                                                                                                                     1.0f, 0.0f, 0.0f,
                                                                                                                     1.0f, 0.0f, 0.0f},
-    m_coloredTriangleMultipleVbosDraw(m_coloredTriangleMultipleVbosVao, 3)
+      m_coloredTriangleMultipleVbosDraw(m_coloredTriangleMultipleVbosVao, 3)
 {
-    m_coloredTrianglePositionBuffer.allocate(GL_ARRAY_BUFFER, sizeof(colorTriVertices), colorTriVertices, GL_STATIC_DRAW);
-    CHECK_GL_ERROR;
+  // Allocation des buffers
+  m_coloredTrianglePositionBuffer.allocate(GL_ARRAY_BUFFER, sizeof(triVertices), triVertices, GL_STATIC_DRAW);
+  m_coloredTriangleColorBuffer.allocate(GL_ARRAY_BUFFER, sizeof(m_onlyColorTriVertices), m_onlyColorTriVertices, GL_STATIC_DRAW);
 
-    m_coloredTriangleColorBuffer.allocate(GL_ARRAY_BUFFER, sizeof(m_onlyColorTriVertices), m_onlyColorTriVertices, GL_STATIC_DRAW);
-    CHECK_GL_ERROR;
-    
-    m_coloredTriangleMultipleVbosVao.specifyAttribute(m_coloredTrianglePositionBuffer, 0, 2, 5 * sizeof(float), 0 * sizeof(float));
-    CHECK_GL_ERROR;
-
-    m_coloredTriangleMultipleVbosVao.specifyAttribute(m_coloredTrianglePositionBuffer, 1, 3, 5 * sizeof(float), 2 * sizeof(float));
-    CHECK_GL_ERROR;
+  // Configuration des attributs de vertex
+  m_coloredTriangleMultipleVbosVao.specifyAttribute(m_coloredTrianglePositionBuffer, 0, 2, 2 * sizeof(float), 0);
+  m_coloredTriangleMultipleVbosVao.specifyAttribute(m_coloredTriangleColorBuffer, 1, 3, 3 * sizeof(float), 0);
 }
 
 void SceneMultipleVbos::run(Window &w)
 {
+  // TODO mise a jour de la couleur
   changeRGB(&m_onlyColorTriVertices[0]);
   changeRGB(&m_onlyColorTriVertices[3]);
   changeRGB(&m_onlyColorTriVertices[6]);
-  // TODO mise a jour de la couleur
-
 
   // TODO mise a jour de la position
   // changePos(posPtr, m_positionX, m_positionY, m_deltaX, m_deltaY);
-  //changePos(, m_positionX, m_positionY, m_deltaX, m_deltaY);
+  changePos(m_onlyColorTriVertices, m_positionX, m_positionY, m_deltaX, m_deltaY);
 
+  // Mise à jour du buffer
+
+  // Mise à jour du buffer de couleur
+  m_coloredTriangleColorBuffer.bind();
+  m_coloredTriangleColorBuffer.update(sizeof(m_onlyColorTriVertices), m_onlyColorTriVertices);
+
+  // Mise à jour de la position
+  m_coloredTrianglePositionBuffer.bind();
+  void *mapped = m_coloredTrianglePositionBuffer.mapBuffer();
+  if (mapped)
+  {
+    changePos((GLfloat *)(mapped), m_positionX, m_positionY, m_deltaX, m_deltaY);
+    m_coloredTrianglePositionBuffer.unmapBuffer();
+  }
   // TODO dessin
-  
+  m_coloredTriangleMultipleVbosDraw.draw();
 }
 
 void SceneMultipleVbos::changeRGB(GLfloat *color)
