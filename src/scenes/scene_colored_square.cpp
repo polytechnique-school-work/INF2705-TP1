@@ -6,7 +6,7 @@
 SceneColoredSquare::SceneColoredSquare(Resources &res)
     : Scene(res),
     m_coloredSquareBuffer(GL_ARRAY_BUFFER),
-    m_coloredSquareDraw(m_coloredSquareVao, 4)
+    m_coloredSquareDraw(m_coloredSquareVao, 6)
 {
     m_coloredSquareBuffer.allocate(GL_ARRAY_BUFFER, sizeof(colorSquareVertices), colorSquareVertices, GL_STATIC_DRAW);
     CHECK_GL_ERROR;

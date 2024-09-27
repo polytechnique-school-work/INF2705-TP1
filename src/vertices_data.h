@@ -8,27 +8,34 @@ const GLfloat triVertices[] = {
 
 const GLfloat squareVertices[] = {
     -0.5f, -0.5f,
-    0.5f, -0.5f,
-    0.5f, 0.5f,
-    -0.5f, 0.5f};
+     0.5f, -0.5f,
+     0.5f,  0.5f,
+
+    -0.5f, -0.5f,
+     0.5f,  0.5f,
+    -0.5f,  0.5f  
+    };
 
 const GLfloat colorTriVertices[] = {
-    -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-    0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-    0.0f, 0.5f, 0.0f, 0.0f, 1.0f};
+    -0.5f, -0.5f,   1.0f, 0.0f, 0.0f,
+    0.5f, -0.5f,    0.0f, 1.0f, 0.0f,
+    0.0f, 0.5f,     0.0f, 0.0f, 1.0f};
 
 const GLfloat colorSquareVertices[] = {
+    -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
     -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-    0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-    0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.0f, 1.0f, 1.0f};
+     0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+
+    -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+     0.5f,  0.5f, 1.0f, 0.0f, 0.0f,
+     0.5f, -0.5f,  0.0f, 1.0f, 0.0f};
 
 const GLfloat colorSquareVerticesReduced[] = {
     // TODO
-    -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-    0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-    0.0f, 0.5f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.0f, 1.0f, 1.0f};
+    -0.5f, -0.5f,   1.0f, 0.0f, 0.0f,
+     0.5f, -0.5f,   0.0f, 1.0f, 0.0f,
+     0.0f, 0.5f,    0.0f, 0.0f, 1.0f,
+    -0.5f, 0.5f,    0.0f, 1.0f, 1.0f};
 
 const GLubyte indexes[] = {
     0, 1, 2, 2, 3, 0};

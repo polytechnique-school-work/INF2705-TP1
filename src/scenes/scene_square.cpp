@@ -6,7 +6,7 @@
 SceneSquare::SceneSquare(Resources &res)
     : Scene(res),
         m_squareBuffer(GL_ARRAY_BUFFER),
-        m_squareDraw(m_squareVao, 4)
+        m_squareDraw(m_squareVao, 6)
 {
   // 1. Initialiser les shaders dans resource
 
