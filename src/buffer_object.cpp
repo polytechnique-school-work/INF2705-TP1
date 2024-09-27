@@ -1,7 +1,7 @@
 #include "buffer_object.h"
 
 BufferObject::BufferObject()
-    : m_type(GL_ARRAY_BUFFER)
+    //: m_type(GL_ELEMENT_ARRAY_BUFFER)
 {
   // danger!!!
   // P.14 du powerpoint 2
@@ -18,8 +18,7 @@ BufferObject::BufferObject(GLenum type)
 BufferObject::BufferObject(GLenum type, GLsizeiptr dataSize, const void *data, GLenum usage)
     : BufferObject(type)
 {
-  glGenBuffers(1, &m_id);
-  allocate(type, dataSize, data, usage);
+ allocate(type, dataSize, data, usage); 
 }
 
 BufferObject::~BufferObject()
@@ -42,6 +41,7 @@ void BufferObject::bind()
 void BufferObject::allocate(GLenum type, GLsizeiptr dataSize, const void *data, GLenum usage)
 {
   // Selon mes recherches, il faut toujours bind avant d'utiliser un buffer pour s'assurer qu'on travaille avec le bon buffer.
+  m_type = type;
   bind();
   glBufferData(type, dataSize, data, usage);
 }
