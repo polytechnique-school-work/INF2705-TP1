@@ -3,10 +3,7 @@
 #include "vertices_data.h"
 #include <utils.h>
 SceneMultipleVbos::SceneMultipleVbos(Resources &res)
-    : Scene(res), m_positionX(0.0f), m_positionY(0.0f), m_deltaX(0.019f), m_deltaY(0.0128f), m_onlyColorTriVertices{1.0f, 0.0f, 0.0f,
-                                                                                                                    1.0f, 0.0f, 0.0f,
-                                                                                                                    1.0f, 0.0f, 0.0f},
-      m_coloredTriangleMultipleVbosDraw(m_coloredTriangleMultipleVbosVao, 3)
+    : Scene(res), m_positionX(0.0f), m_positionY(0.0f), m_deltaX(0.019f), m_deltaY(0.0128f), m_onlyColorTriVertices{1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f}, m_coloredTriangleMultipleVbosDraw(m_coloredTriangleMultipleVbosVao, 3)
 {
   // Allocation des buffers
   m_coloredTrianglePositionBuffer.allocate(GL_ARRAY_BUFFER, sizeof(triVertices), triVertices, GL_STATIC_DRAW);
@@ -23,12 +20,6 @@ void SceneMultipleVbos::run(Window &w)
   changeRGB(&m_onlyColorTriVertices[0]);
   changeRGB(&m_onlyColorTriVertices[3]);
   changeRGB(&m_onlyColorTriVertices[6]);
-
-  // TODO mise a jour de la position
-  // changePos(posPtr, m_positionX, m_positionY, m_deltaX, m_deltaY);
-  changePos(m_onlyColorTriVertices, m_positionX, m_positionY, m_deltaX, m_deltaY);
-
-  // Mise à jour du buffer
 
   // Mise à jour du buffer de couleur
   m_coloredTriangleColorBuffer.bind();
