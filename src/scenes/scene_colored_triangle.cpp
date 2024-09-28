@@ -27,5 +27,4 @@ void SceneColoredTriangle::run(Window &w)
   m_resources.color.use();
   CHECK_GL_ERROR;
   m_coloredTriangleDraw.draw();
-  // m_coloredTriangleDraw.unbind();
 }

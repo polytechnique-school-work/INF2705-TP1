@@ -37,4 +37,6 @@ void SceneDrawElements::run(Window &w)
 
   m_coloredSquareReduceDraw.draw();
   CHECK_GL_ERROR;
+
+
 }
