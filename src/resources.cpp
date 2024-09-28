@@ -10,6 +10,8 @@ Resources::Resources()
 {
   initShaderProgram(basic, "./shaders/basic.vs.glsl", "./shaders/basic.fs.glsl");
   initShaderProgram(color, "./shaders/color.vs.glsl", "./shaders/color.fs.glsl");
+
+  initShaderProgram(transformColorAttrib, "./shaders/transform.vs.glsl", "./shaders/transform.fs.glsl");
 }
 
 void Resources::initShaderProgram(ShaderProgram &program, const char *vertexSrcPath, const char *fragmentSrcPath)
@@ -17,6 +19,7 @@ void Resources::initShaderProgram(ShaderProgram &program, const char *vertexSrcP
 
   std::string vertexShaderCode = readFile(vertexSrcPath);
   std::string fragmentShaderCode = readFile(fragmentSrcPath);
+
   ShaderObject vertexShader(GL_VERTEX_SHADER, vertexShaderCode.c_str());
   ShaderObject fragmentShader(GL_FRAGMENT_SHADER, fragmentShaderCode.c_str());
 
