@@ -24,8 +24,6 @@ SceneDrawElements::SceneDrawElements(Resources &res)
 
 void SceneDrawElements::run(Window &w)
 {
-
-
     m_coloredSquareReduceVao.bind();
 
     m_resources.coloredSquareReduceBuffer.bind();

@@ -14,8 +14,6 @@ SceneCube::SceneCube(Resources &res)
 // 6 faces de 2 triangles (3 sommets par triangles)
 // 6 * 2 * 3 = 36
 {
-    // TODO
-
     m_cubeVao.bind();
 
     // 1. Initialiser les shaders (déjà fait dans le ressources).

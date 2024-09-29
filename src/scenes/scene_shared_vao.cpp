@@ -1,5 +1,4 @@
 #include "scene_shared_vao.h"
-
 #include "vertices_data.h"
 #include <utils.h>
 
@@ -9,6 +8,8 @@ SceneSharedVao::SceneSharedVao(Resources &res)
     m_coloredSquareSharedDraw(m_sharedVao, 6)
 
 {
+    m_resources.coloredTriangleBuffer.bind();
+        CHECK_GL_ERROR;
     //m_sharedVao.bind();
     // CHECK_GL_ERROR;
     
@@ -16,13 +17,6 @@ SceneSharedVao::SceneSharedVao(Resources &res)
     // CHECK_GL_ERROR;
 
     //déjà alloué dans scene_colored_triangle
-
-    m_sharedVao.specifyAttribute(m_resources.coloredTriangleBuffer, 0, 2, 5 * sizeof(float), 0 * sizeof(float));
-
-    CHECK_GL_ERROR;
-
-    m_sharedVao.specifyAttribute(m_resources.coloredTriangleBuffer, 1, 3, 5 * sizeof(float), 2 * sizeof(float));
-    CHECK_GL_ERROR;
 
 
     // m_resources.coloredSquareReduceBuffer.allocate(GL_ARRAY_BUFFER, sizeof(colorSquareVertices), colorSquareVertices, GL_STATIC_DRAW);
@@ -33,11 +27,7 @@ SceneSharedVao::SceneSharedVao(Resources &res)
 
     //déjà alloué dans scene_draw_elements
 
-    m_sharedVao.specifyAttribute(m_resources.coloredSquareReduceBuffer, 0, 2, 5 * sizeof(float), 0 * sizeof(float));
-    CHECK_GL_ERROR;
 
-    m_sharedVao.specifyAttribute(m_resources.coloredSquareReduceBuffer, 1, 3, 5 * sizeof(float), 2 * sizeof(float));
-    CHECK_GL_ERROR;
 }
 
 void SceneSharedVao::run(Window &w)
@@ -47,7 +37,12 @@ void SceneSharedVao::run(Window &w)
 
 void SceneSharedVao::runTriangle()
 {
-    //m_sharedVao.bind();
+    m_sharedVao.bind();
+    CHECK_GL_ERROR;
+    m_sharedVao.specifyAttribute(m_resources.coloredTriangleBuffer, 0, 2, 5 * sizeof(float), 0 * sizeof(float));
+    CHECK_GL_ERROR;
+
+    m_sharedVao.specifyAttribute(m_resources.coloredTriangleBuffer, 1, 3, 5 * sizeof(float), 2 * sizeof(float));
     CHECK_GL_ERROR;
     m_resources.coloredTriangleBuffer.bind();
     CHECK_GL_ERROR;
@@ -64,6 +59,13 @@ void SceneSharedVao::runSquare()
 {
     m_sharedVao.bind();
     CHECK_GL_ERROR;
+
+    m_sharedVao.specifyAttribute(m_resources.coloredSquareReduceBuffer, 0, 2, 5 * sizeof(float), 0 * sizeof(float));
+    CHECK_GL_ERROR;
+
+    m_sharedVao.specifyAttribute(m_resources.coloredSquareReduceBuffer, 1, 3, 5 * sizeof(float), 2 * sizeof(float));
+    CHECK_GL_ERROR;
+
     m_resources.coloredSquareReduceBuffer.bind();
     CHECK_GL_ERROR;
     m_resources.coloredSquareReduceIndicesBuffer.bind();
@@ -71,8 +73,10 @@ void SceneSharedVao::runSquare()
     m_resources.color.use();
     CHECK_GL_ERROR;
 
+
     m_coloredSquareSharedDraw.draw();
     CHECK_GL_ERROR;
 
     m_sharedVao.unbind();
+        CHECK_GL_ERROR;
 }
