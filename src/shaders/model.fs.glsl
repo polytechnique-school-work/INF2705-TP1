@@ -1,3 +1,9 @@
 #version 330 core
 
-// TODO
+in uniform vertexColor;
+
+out vec4 fragColor;
+
+void main() {
+    fragColor = vertexColor;
+}
