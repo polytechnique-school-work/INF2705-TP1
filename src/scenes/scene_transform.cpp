@@ -56,55 +56,48 @@ void SceneTransform::run(Window &w)
 
     m_resources.transformSolidColor.use(); 
 
+    
+    glEnable(GL_DEPTH_TEST);
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     float carouselHorseTranslation = sin(m_carouselAngleRad * 2.0f) / 6.0f;
     const int N_HORSES = 5;
     for (int i = 0; i < N_HORSES; i++)
     {
         glm::mat4 horsePoleGroup = glm::mat4(1.0f);
-        
-        horsePoleGroup = glm::translate(horsePoleGroup, glm::vec3(1.7f, 1.0f, 0.0f));
 
+        //animation: (carrousel tourne)
+        horsePoleGroup = glm::rotate(horsePoleGroup, m_carouselAngleRad, glm::vec3(0.0f, 1.0f, 0.0f)); //rotation en y
+
+        //animation: la direction et la translation sont en y, les chevaux bougent de haut en bas
+        float directiony = (i % 2 == 0) ? 1.0f : -1.0f;
+        horsePoleGroup = glm::translate(horsePoleGroup, glm::vec3(0.0f, directiony * carouselHorseTranslation, 0.0f));
+
+        //matrice de rotation pour placer les chevaux
         horsePoleGroup = glm::rotate(horsePoleGroup, 2*glm::pi<float>() / N_HORSES *(float)(i), glm::vec3(0.0f, 1.0f, 0.0f));
+        
+        //éloigner les chevaux de l'origine
+        horsePoleGroup = glm::translate(horsePoleGroup, glm::vec3(1.7f, 1.0f, 0.0f));
 
         glm::mat4 mvpHorsePoleGroup = projection * view * horsePoleGroup;
 
         glUniformMatrix4fv(m_resources.mvpLocationTransformSolidColor, 1, GL_FALSE, glm::value_ptr(mvpHorsePoleGroup));
 
-        glEnable(GL_DEPTH_TEST);
-
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glUniform4f(m_resources.colorLocationTransformSolidColor, 0.0f, 0.0f, 1.0f, 1.0f);
+        m_carouselHorse.draw();
 
         glUniform4f(m_resources.colorLocationTransformSolidColor, 0.0f, 1.0f, 0.0f, 1.0f);
         m_carouselPole.draw();
-
-        glUniform4f(m_resources.colorLocationTransformSolidColor, 0.0f, 0.0f, 1.0f, 1.0f);
-        m_carouselHorse.draw();
     }
     m_carouselAngleRad -= 0.01f;
-
-
-
-    //TODO
-    //matrice d’animation de rotation pour le groupe de pôle et cheval pour faire tourner le carrousel
-    //L’angle est m_carouselAngleRad
-
-    //TODO
-    //matrice d’animation de translation pour le cheval pour l’animer de haut en bas
-    //Un cheval sur deux à une translation positive de carouselHorseTranslation, l’autre est négative.  
-    //Pensez à la réutilisation des matrices et essayer de minimiser le nombre de multiplication en mémorisant les matrices dans des variables.
-
 
     glm::mat4 mvpBase = projection * view * baseModel;
     CHECK_GL_ERROR;
 
     glUniformMatrix4fv(m_resources.mvpLocationTransformSolidColor, 1, GL_FALSE, glm::value_ptr(mvpBase));
-
-    glEnable(GL_DEPTH_TEST);
-
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
   
-    glUniform4f(m_resources.colorLocationTransformSolidColor, 1.0f, 0.0f, 0.0f, 0.0f); //TODO: rouge
+    glUniform4f(m_resources.colorLocationTransformSolidColor, 1.0f, 0.0f, 0.0f, 0.0f);
     m_carouselFrame.draw();
     CHECK_GL_ERROR;
 }
