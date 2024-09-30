@@ -27,7 +27,7 @@ void DrawElementsCommand::draw()
 {
   m_vao.bind();
   // P.33 du powerpoint 2
-  glDrawElements(GL_TRIANGLES, m_count, GL_UNSIGNED_BYTE, 0);
+  glDrawElements(GL_TRIANGLES, m_count, m_type, nullptr);
 }
 
 // void DrawElementsCommand::draw()

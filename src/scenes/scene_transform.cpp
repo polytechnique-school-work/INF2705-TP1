@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <utils.h>
 
 SceneTransform::SceneTransform(Resources &res, bool &isMouseMotionEnabled, bool &isThirdPerson, bool &isOrtho)
     : Scene(res),
@@ -39,6 +40,7 @@ void SceneTransform::run(Window &w)
 
     //matrice de modèle de la base du carrousel
     glm::mat4 baseModel = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -0.1f, 0.0f));
+    //glm::mat4 baseModel = glm::mat4(1.0f);
 
     //TODO
     //matrice modèle du groupe de pôle et cheval
@@ -68,23 +70,31 @@ void SceneTransform::run(Window &w)
     glm::mat4 view = m_isThirdPerson ? getCameraThirdPerson() : getCameraFirstPerson();
 
     //TODO
-    //setter les matrice de modèle et les passer au shader?
+    //setter les matrices de modèle et les passer au shader?
     glm::mat4 mvp = projection * view * baseModel;
-    m_resources.mvpLocationTransformSolidColor = m_resources.transformColorAttrib.getUniformLoc("mvp");
-    glUniformMatrix4fv(m_resources.mvpLocationTransformSolidColor, 1, GL_FALSE, glm::value_ptr(mvp));
+    CHECK_GL_ERROR;
+    m_resources.mvpLocationTransformSolidColor = m_resources.transformSolidColor.getUniformLoc("mvp");
+    CHECK_GL_ERROR;
+   
 
+    CHECK_GL_ERROR;
     m_resources.colorLocationTransformSolidColor = m_resources.transformSolidColor.getUniformLoc("vertexColor");
 
     m_resources.transformSolidColor.use(); 
+    glUniformMatrix4fv(m_resources.mvpLocationTransformSolidColor, 1, GL_FALSE, glm::value_ptr(mvp));
+    glEnable(GL_DEPTH_TEST);
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   
     glUniform4f(m_resources.colorLocationTransformSolidColor, 1.0f, 0.0f, 0.0f, 0.0f); //tODO: rouge
     m_carouselFrame.draw();
+    CHECK_GL_ERROR;
 
-    glUniform4f(m_resources.colorLocationTransformSolidColor, 0.5f, 0.2f, 0.7f, 1.0f); //TODO: jaune
-    m_carouselPole.draw();
+    // glUniform4f(m_resources.colorLocationTransformSolidColor, 0.5f, 0.2f, 0.7f, 1.0f); //TODO: jaune
+    // m_carouselPole.draw();
 
-    glUniform4f(m_resources.colorLocationTransformSolidColor, 0.5f, 0.2f, 0.7f, 1.0f); //TODO: bleu
-    m_carouselHorse.draw();
+    // glUniform4f(m_resources.colorLocationTransformSolidColor, 0.5f, 0.2f, 0.7f, 1.0f); //TODO: bleu
+    // m_carouselHorse.draw();
 }
 
 void SceneTransform::updateInput(Window &w)

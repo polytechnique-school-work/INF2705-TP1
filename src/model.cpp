@@ -2,7 +2,7 @@
 #include "obj_loader.h"
 
 // Je l'initialise à 0 et après je le change avec la taille des indices
-Model::Model(const char *path) : m_drawcall(m_vao, 0)
+Model::Model(const char *path) : m_drawcall(m_vao, 0, GL_UNSIGNED_INT)
 {
     m_vao.bind();
 
