@@ -12,19 +12,18 @@ SceneColoredTriangle::SceneColoredTriangle(Resources &res)
   // 2. Utiliser les vertices
 
   res.coloredTriangleBuffer.allocate(GL_ARRAY_BUFFER, sizeof(colorTriVertices), colorTriVertices, GL_STATIC_DRAW);
-  CHECK_GL_ERROR;
+
   // 3. Configurer les buffers et les attributs de vertex
   m_coloredTriangleVao.specifyAttribute(res.coloredTriangleBuffer, 0, 2, 5 * sizeof(float), 0 * sizeof(float));
-  CHECK_GL_ERROR;
+
   m_coloredTriangleVao.specifyAttribute(res.coloredTriangleBuffer, 1, 3, 5 * sizeof(float), 2 * sizeof(float));
-  CHECK_GL_ERROR;
 }
 
 void SceneColoredTriangle::run(Window &w)
 {
   // 4. Dessiner le triangle
-  CHECK_GL_ERROR;
+
   m_resources.color.use();
-  CHECK_GL_ERROR;
+
   m_coloredTriangleDraw.draw();
 }
