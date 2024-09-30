@@ -12,13 +12,6 @@ Model::Model(const char *path) : m_drawcall(m_vao, 0, GL_UNSIGNED_INT)
 
     m_vbo.allocate(GL_ARRAY_BUFFER, vertexData.size() * sizeof(GLfloat), vertexData.data(), GL_STATIC_DRAW);
     m_ebo.allocate(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), indices.data(), GL_STATIC_DRAW);
-
-    // Est-ce qu'on devrait faire un specifyAttribute pour le VAO?
-    // Je sais pas quoi mettre dans le specifyAttribute...
-    // C'est toujours 3 coordonnées, on specify l'attribute seulement pour le vbo de position
-    // Je sais pas trop pourquoi on met 8, mais selon google ce serait pour :
-    // | Position (3 floats) | Normale (3 floats) | Coordonnées de texture (2 floats) |
-    // On peut essayer de mettre juste 3 si ça marche pas...
     m_vao.specifyAttribute(m_vbo, 0, 3, 3 * sizeof(float), 0 * sizeof(float));
     m_drawcall.setCount(indices.size());
 }
@@ -45,8 +38,6 @@ void Model::loadObj(const char *path, std::vector<GLfloat> &vertexData, std::vec
 
 void Model::draw()
 {
-    // TODO : ils ne donnent aucune informations sur comment est-ce qu'on le draw...
-    // Pas moyen d'accéder au ressources pour bind le shader?
     m_vao.bind();
     m_vbo.bind();
     m_ebo.bind();

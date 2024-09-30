@@ -14,6 +14,9 @@ SceneTransform::SceneTransform(Resources &res, bool &isMouseMotionEnabled, bool 
       m_carouselPole("../models/carousel_pole.obj"),
       m_carouselHorse("../models/carousel_horse.obj")
 {
+    m_resources.mvpLocationTransformSolidColor = m_resources.transformSolidColor.getUniformLoc("mvp");
+    CHECK_GL_ERROR;
+    m_resources.colorLocationTransformSolidColor = m_resources.transformSolidColor.getUniformLoc("vertexColor");
 
 }
 
@@ -38,22 +41,48 @@ void SceneTransform::run(Window &w)
     float aspectRatio = static_cast<float>(w.getWidth()) / static_cast<float>(w.getHeight());
     glm::mat4 projectionPersp = glm::perspective(glm::radians(70.0f), aspectRatio, 0.1f, 100.0f);
 
+    
+    glm::mat4 projection = m_isOrtho ? projectionOrtho : projectionPersp;
+
+    glm::mat4 view = m_isThirdPerson ? getCameraThirdPerson() : getCameraFirstPerson();
+
     //matrice de modèle de la base du carrousel
     glm::mat4 baseModel = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -0.1f, 0.0f));
-    //glm::mat4 baseModel = glm::mat4(1.0f);
 
     //TODO
     //matrice modèle du groupe de pôle et cheval
     //est à une hauteur de 1 en y, un rayon de 1.7 en x et à un angle multiple de 2π/N_HORSES. 
     //Vous ne devriez pas avoir de trigonométrie dans le code des transformations.
 
+    m_resources.transformSolidColor.use(); 
+
     float carouselHorseTranslation = sin(m_carouselAngleRad * 2.0f) / 6.0f;
     const int N_HORSES = 5;
     for (int i = 0; i < N_HORSES; i++)
     {
-        // TODO
+        glm::mat4 horsePoleGroup = glm::mat4(1.0f);
+        
+        horsePoleGroup = glm::translate(horsePoleGroup, glm::vec3(1.7f, 1.0f, 0.0f));
+
+        horsePoleGroup = glm::rotate(horsePoleGroup, 2*glm::pi<float>() / N_HORSES *(float)(i), glm::vec3(0.0f, 1.0f, 0.0f));
+
+        glm::mat4 mvpHorsePoleGroup = projection * view * horsePoleGroup;
+
+        glUniformMatrix4fv(m_resources.mvpLocationTransformSolidColor, 1, GL_FALSE, glm::value_ptr(mvpHorsePoleGroup));
+
+        glEnable(GL_DEPTH_TEST);
+
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glUniform4f(m_resources.colorLocationTransformSolidColor, 0.0f, 1.0f, 0.0f, 1.0f);
+        m_carouselPole.draw();
+
+        glUniform4f(m_resources.colorLocationTransformSolidColor, 0.0f, 0.0f, 1.0f, 1.0f);
+        m_carouselHorse.draw();
     }
     m_carouselAngleRad -= 0.01f;
+
+
 
     //TODO
     //matrice d’animation de rotation pour le groupe de pôle et cheval pour faire tourner le carrousel
@@ -64,37 +93,20 @@ void SceneTransform::run(Window &w)
     //Un cheval sur deux à une translation positive de carouselHorseTranslation, l’autre est négative.  
     //Pensez à la réutilisation des matrices et essayer de minimiser le nombre de multiplication en mémorisant les matrices dans des variables.
 
-    glm::mat4 projection = m_isOrtho ? projectionOrtho : projectionPersp;
 
-
-    glm::mat4 view = m_isThirdPerson ? getCameraThirdPerson() : getCameraFirstPerson();
-
-    //TODO
-    //setter les matrices de modèle et les passer au shader?
-    glm::mat4 mvp = projection * view * baseModel;
+    glm::mat4 mvpBase = projection * view * baseModel;
     CHECK_GL_ERROR;
-    m_resources.mvpLocationTransformSolidColor = m_resources.transformSolidColor.getUniformLoc("mvp");
-    CHECK_GL_ERROR;
-   
 
-    CHECK_GL_ERROR;
-    m_resources.colorLocationTransformSolidColor = m_resources.transformSolidColor.getUniformLoc("vertexColor");
+    glUniformMatrix4fv(m_resources.mvpLocationTransformSolidColor, 1, GL_FALSE, glm::value_ptr(mvpBase));
 
-    m_resources.transformSolidColor.use(); 
-    glUniformMatrix4fv(m_resources.mvpLocationTransformSolidColor, 1, GL_FALSE, glm::value_ptr(mvp));
     glEnable(GL_DEPTH_TEST);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
   
-    glUniform4f(m_resources.colorLocationTransformSolidColor, 1.0f, 0.0f, 0.0f, 0.0f); //tODO: rouge
+    glUniform4f(m_resources.colorLocationTransformSolidColor, 1.0f, 0.0f, 0.0f, 0.0f); //TODO: rouge
     m_carouselFrame.draw();
     CHECK_GL_ERROR;
-
-    // glUniform4f(m_resources.colorLocationTransformSolidColor, 0.5f, 0.2f, 0.7f, 1.0f); //TODO: jaune
-    // m_carouselPole.draw();
-
-    // glUniform4f(m_resources.colorLocationTransformSolidColor, 0.5f, 0.2f, 0.7f, 1.0f); //TODO: bleu
-    // m_carouselHorse.draw();
 }
 
 void SceneTransform::updateInput(Window &w)
