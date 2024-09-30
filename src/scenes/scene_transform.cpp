@@ -2,6 +2,7 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 SceneTransform::SceneTransform(Resources &res, bool &isMouseMotionEnabled, bool &isThirdPerson, bool &isOrtho)
     : Scene(res),
@@ -61,28 +62,28 @@ void SceneTransform::run(Window &w)
     //Un cheval sur deux à une translation positive de carouselHorseTranslation, l’autre est négative.  
     //Pensez à la réutilisation des matrices et essayer de minimiser le nombre de multiplication en mémorisant les matrices dans des variables.
 
-    //TODO
-    //setter la matrice de projection et la passer au shader
     glm::mat4 projection = m_isOrtho ? projectionOrtho : projectionPersp;
 
-    //TODO
-    //setter la matrice de vue et la passer au shader
+
     glm::mat4 view = m_isThirdPerson ? getCameraThirdPerson() : getCameraFirstPerson();
 
     //TODO
-    //setter la matrice de modèle et la passer au shader?
+    //setter les matrice de modèle et les passer au shader?
+    glm::mat4 mvp = projection * view * baseModel;
+    m_resources.mvpLocationTransformSolidColor = m_resources.transformColorAttrib.getUniformLoc("mvp");
+    glUniformMatrix4fv(m_resources.mvpLocationTransformSolidColor, 1, GL_FALSE, glm::value_ptr(mvp));
 
-    GLint uniformLocation = m_resources.transformSolidColor.getUniformLoc("vertexColor");
+    m_resources.colorLocationTransformSolidColor = m_resources.transformSolidColor.getUniformLoc("vertexColor");
 
     m_resources.transformSolidColor.use(); 
   
-    glUniform4f(uniformLocation, 1.0f, 0.0f, 0.0f, 0.0f); //toDO: rouge
+    glUniform4f(m_resources.colorLocationTransformSolidColor, 1.0f, 0.0f, 0.0f, 0.0f); //tODO: rouge
     m_carouselFrame.draw();
 
-    glUniform4f(uniformLocation, 0.5f, 0.2f, 0.7f, 1.0f); //TODO: jaune
+    glUniform4f(m_resources.colorLocationTransformSolidColor, 0.5f, 0.2f, 0.7f, 1.0f); //TODO: jaune
     m_carouselPole.draw();
 
-    glUniform4f(uniformLocation, 0.5f, 0.2f, 0.7f, 1.0f); //TODO: bleu
+    glUniform4f(m_resources.colorLocationTransformSolidColor, 0.5f, 0.2f, 0.7f, 1.0f); //TODO: bleu
     m_carouselHorse.draw();
 }
 
