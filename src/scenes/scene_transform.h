@@ -30,9 +30,9 @@ private:
 
   float m_carouselAngleRad;
 
-  // Model m_carouselFrame;
-  // Model m_carouselPole;
-  // Model m_carouselHorse;
+  Model m_carouselFrame;
+  Model m_carouselPole;
+  Model m_carouselHorse;
 };
 
 #endif // SCENE_TRANSFORM_H

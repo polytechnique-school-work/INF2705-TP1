@@ -1,6 +1,6 @@
 #version 330 core
 
-in uniform vertexColor;
+uniform vec4 vertexColor;
 
 out vec4 fragColor;
 
