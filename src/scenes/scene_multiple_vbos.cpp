@@ -63,18 +63,18 @@ void SceneMultipleVbos::changeRGB(GLfloat *color)
   color[2] = b / 255.0f;
 }
 
-void SceneMultipleVbos::changePos(GLfloat *pos, float &cx, float &cy, float &dx, float &dy)
+void SceneMultipleVbos::changePos(GLfloat* pos, float& cx, float& cy, float& dx, float& dy)
 {
-  if ((cx < -1 && dx < 0) || (cx > 1 && dx > 0))
-    dx = -dx;
-  pos[0] += dx;
-  pos[6] += dx;
-  pos[3] += dx;
-  cx += dx;
-  if ((cy < -1 && dy < 0) || (cy > 1 && dy > 0))
-    dy = -dy;
-  pos[1] += dy;
-  pos[4] += dy;
-  pos[7] += dy;
-  cy += dy;
+    if ((cx < -1 && dx < 0) || (cx > 1 && dx > 0))
+        dx = -dx;
+    pos[0] += dx;
+    pos[4] += dx;
+    pos[2] += dx;
+    cx += dx;
+    if ((cy < -1 && dy < 0) || (cy > 1 && dy > 0))
+        dy = -dy;
+    pos[1] += dy;
+    pos[3] += dy;
+    pos[5] += dy;
+    cy += dy;
 }
